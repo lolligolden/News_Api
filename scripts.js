@@ -6,7 +6,7 @@ async function fetchNews() {
         const response = await fetch(url);
         const data = await response.json();
         console.log(data);
-        //TODO: Add a function call to display the news
+        displayNews(data.articles);
     } catch (error) {
         console.error('There was an error!', error);
     }
@@ -17,12 +17,15 @@ fetchNews();
 function displayNews(articles) {
     const newsDiv = document.querySelector('#news');
     for(const article of articles) {
-        const articleDiv = documen.createElement('div');
+        const articleDiv = document.createElement('div');
 
         //create and append a headline to the article Div
         const title = document.createElement('h4');
         title.textContent = article.title;
         articleDiv.appendChild(title);
 
+        // TODO: Use document.createElement and appendChild to 
+        // create and append more elements
+        newsDiv.appendChild(articleDiv);
     }
 }
