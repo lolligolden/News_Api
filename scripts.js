@@ -15,17 +15,35 @@ async function fetchNews() {
 fetchNews();
 
 function displayNews(articles) {
-    const newsDiv = document.querySelector('#news');
-    for(const article of articles) {
-        const articleDiv = document.createElement('div');
+    for(let i = 0; i < articles.length; i++) {
+        const newsDiv = document.querySelector('#news');
+        const title = document.querySelector('#card-title');
+        const snippetDiv = document.querySelector('#card-text');
+        const linkArticle = document.getElementsByTagName('a');
 
-        //create and append a headline to the article Div
-        const title = document.createElement('h4');
-        title.textContent = article.title;
-        articleDiv.appendChild(title);
+        //display Content
+        title.textContent = articles[i].title;
+        snippetDiv.textContent = articles[i].description;
+        linkArticle.textContent = articles[i].url;
+
+        //articleDiv.appendChild(title);
+        //create and append a descripion to the headline
+        articleDiv.appendChild(snippetDiv);
+        //create and append a link to the article
+        linkArticle.click();
+        linkArticle.style.color = "blue";
+        articleDiv.appendChild(linkArticle);
+        
+        const articleDiv = document.querySelector('#card-text');
+
+
+        //create and append a break between articles
+        const breakSpace = document.createElement('hr');
+        articleDiv.appendChild(breakSpace);
+
 
         // TODO: Use document.createElement and appendChild to 
         // create and append more elements
-        newsDiv.appendChild(articleDiv);
+        
     }
 }
