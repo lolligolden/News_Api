@@ -5,7 +5,6 @@ async function fetchNews() {
     try {
         const response = await fetch(url);
         const data = await response.json();
-        console.log(data);
         displayNews(data.articles);
     } catch (error) {
         console.error('There was an error!', error);
@@ -15,32 +14,53 @@ async function fetchNews() {
 fetchNews();
 
 function displayNews(articles) {
-    for(let i = 0; i < articles.length; i++) {
-        const newsDiv = document.querySelector('#news');
-        const title = document.querySelector('#card-title');
-        const snippetDiv = document.querySelector('#card-text');
-        const linkArticle = document.getElementsByTagName('a');
+    const newsDiv = document.getElementById('news');
+    
 
-        //display Content
-        title.textContent = articles[i].title;
-        snippetDiv.textContent = articles[i].description;
-        linkArticle.textContent = articles[i].url;
 
-        //articleDiv.appendChild(title);
-        //create and append a descripion to the headline
+    for(const article of articles) {
+        const articleDiv = document.createElement('div');
+        newsDiv.appendChild(articleDiv);
+        //newsDiv.setAttribute('card');
+       
+    //     //create and append an image to the articleDiv
+        const imageDiv = document.createElement('img');
+        imageDiv.src = article.urlToImage;
+        articleDiv.appendChild(imageDiv);
+        imageDiv.style.maxWidth= "30rem";
+
+        //create and append a headline to the articleDiv
+        const title = document.createElement('h4');
+        title.textContent = article.title;
+        articleDiv.appendChild(title);
+        //create and append a snippet to the headline
+        const snippetDiv = document.createElement('p');
+        snippetDiv.textContent = article.description;
         articleDiv.appendChild(snippetDiv);
-        //create and append a link to the article
-        linkArticle.click();
+        //create and append a link to story
+        const linkArticle = document.createElement('a');
+        linkArticle.textContent = article.url;
+        linkArticle.setAttribute('href', article.url)
         linkArticle.style.color = "blue";
         articleDiv.appendChild(linkArticle);
         
-        const articleDiv = document.querySelector('#card-text');
+        //create and append a headline to the articles
+        //newsDiv.appendChild(articleDiv);
+        // newsDiv.textContent = articles.title;
+        // snippetDiv.textContent = articles[i].description;
+        // linkArticle.textContent = articles[i].url;
+
+        //articleDiv.appendChild(title);
+        //create and append a descripion to the headline
+        ;
+        //create and append a link to the article
+                
 
 
         //create and append a break between articles
         const breakSpace = document.createElement('hr');
         articleDiv.appendChild(breakSpace);
-
+        
 
         // TODO: Use document.createElement and appendChild to 
         // create and append more elements
